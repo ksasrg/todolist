@@ -1,32 +1,45 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { filterType } from './App';
+import TasksList from "./TasksList";
 
-type TaskType = {
-    id: number
-    title: string
-    isDone: boolean
+type TodoListPropsType = {
+  title: string
+  tasks: TaskType[]
+  changeFilter: (filter: filterType) => void
+  removeTask: (taskId: number) => void
 }
 
-type PropsType = {
-    title: string
-    tasks: Array<TaskType>
+export type TaskType = {
+  id: number
+  title: string
+  isDone: boolean
 }
 
-export function Todolist(props: PropsType) {
-    return <div>
-        <h3>{props.title}</h3>
-        <div>
-            <input/>
-            <button>+</button>
-        </div>
-        <ul>
-            <li><input type="checkbox" checked={props.tasks[0].isDone}/> <span>{props.tasks[0].title}</span></li>
-            <li><input type="checkbox" checked={props.tasks[1].isDone}/> <span>{props.tasks[1].title}</span></li>
-            <li><input type="checkbox" checked={props.tasks[2].isDone}/> <span>{props.tasks[2].title}</span></li>
-        </ul>
-        <div>
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
-        </div>
+const TodoList: FC<TodoListPropsType> = (props): JSX.Element => {
+  return (
+    <div className={"todolist"}>
+      <h3>{props.title}</h3>
+      <div>
+        <input />
+        <button>+</button>
+      </div>
+      <TasksList tasks={props.tasks} removeTask={props.removeTask} />
+      <div>
+        <button
+          onClick={() => props.changeFilter('all')}
+        >All
+        </button>
+        <button
+          onClick={() => props.changeFilter('active')}
+        >Active
+        </button>
+        <button
+          onClick={() => props.changeFilter('complete')}
+        >Completed
+        </button>
+      </div>
     </div>
-}
+  );
+};
+
+export default TodoList;
