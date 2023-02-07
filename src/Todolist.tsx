@@ -1,57 +1,61 @@
 import React, { useState } from 'react';
 
-type TaskType = {
-    id: number
-    title: string
-    isDone: boolean
+export type TaskType = {
+  id: number
+  title: string
+  isDone: boolean
 }
 
 type PropsType = {
-    title: string
-    tasks: Array<TaskType>
-    removeTask: (taskId: number) => void
+  title: string
+  tasks: Array<TaskType>
 }
 
+type filterType = 'all' | 'active' | 'complete';
 
+export function Todolist(props: PropsType) {
 
+  let [tasks, setTasks] = useState<TaskType[]>(props.tasks);
 
-export function Todolist(props: PropsType) {     
+  const onClickDel = (taskId: number) => {
+    setTasks(tasks.filter(t => t.id !== taskId));    
+  }
+  
 
-    // const onClickFilter = (filter: 'all' | 'active' | 'complete') => {
-    //     if (filter == 'active') {
-    //         setTasks(newTasks.filter(t => t.isDone == false));            
-    //         return;
-    //     }
-    //     if (filter == 'complete') {
-    //         setTasks(newTasks.filter(t => t.isDone == true));
-    //         return;
-    //     }
-        
-    //     setTasks(newTasks);
-    // }
+  const [filter, setFilter] = useState<filterType>('all');
+  const onClickFilter = (filter: filterType) => setFilter(filter);
 
-    return <div>
-        <h3>{props.title}</h3>
-        <div>
-            <input />
-            <button>+</button>
-        </div>
-        <ul>
-            {props.tasks.map((el) => {
-                return (
-                    <li key={el.id}>
-                        <input type="checkbox" checked={el.isDone} />
-                        <span>{el.title} </span>
-                        <button onClick={() => props.removeTask(el.id)}>Del</button>
-                    </li>
+  let filteredTasks = tasks;
 
-                )
-            })}
-        </ul>
-        <div>
-            {/* <button onClick={() => onClickFilter('all')}>All</button>
-            <button onClick={() => onClickFilter('active')}>Active</button>
-            <button onClick={() => onClickFilter('complete')}>Completed</button> */}
-        </div>
+  if (filter == 'active') {
+    filteredTasks = tasks.filter(t => t.isDone == false);
+  }
+  if (filter == 'complete') {
+    filteredTasks = tasks.filter(t => t.isDone == true);
+  }
+
+  return <div>
+    <h3>{props.title}</h3>
+    <div>
+      <input />
+      <button>+</button>
     </div>
+    <ul>
+      {filteredTasks.map((el) => {
+        return (
+          <li key={el.id}>
+            <input type="checkbox" checked={el.isDone} onChange={()=>{}} />
+            <span>{el.title} </span>
+            <button
+              onClick={() => onClickDel(el.id)}>X</button>
+          </li>
+        )
+      })}
+    </ul>
+    <div>
+      <button onClick={() => onClickFilter('all')}>All</button>
+      <button onClick={() => onClickFilter('active')}>Active</button>
+      <button onClick={() => onClickFilter('complete')}>Completed</button>
+    </div>
+  </div>
 }
