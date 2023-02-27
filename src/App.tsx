@@ -18,7 +18,7 @@ type TaskType = {
 }
 
 type AllTaskType = {
-    [key: string]: TaskType[]
+    key: TaskType[]
 }
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
         { id: todoListId2, title: 'What to buy', filter: 'completed' },
     ])
 
-    let [allTasks, setAllTasks] = useState<AllTaskType>({
+    let [allTasks, setAllTasks] = useState({
         [todoListId1]: [
             { id: v1(), title: "HTML&CSS", isDone: true },
             { id: v1(), title: "JS", isDone: true },
