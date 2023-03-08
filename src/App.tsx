@@ -123,7 +123,7 @@ function App() {
                         <Menu />
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        News
+                        Todolists
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
@@ -132,7 +132,7 @@ function App() {
                 <Grid container style={{ padding: '20px' }}>
                     <AddItemForm addItem={addTodoList} />
                 </Grid>
-                <Grid container spacing={5}>
+                <Grid container spacing={3}>
                     {
                         todoLists.map((tl) => {
 

@@ -52,7 +52,7 @@ export function Todolist(props: PropsType) {
         </h3>
 
         <AddItemForm addItem={addTask} />
-        <ul style={{listStyleType: 'none'}}>
+        <ul style={{ listStyleType: 'none' }}>
             {
                 props.tasks.map(t => {
 
@@ -78,7 +78,6 @@ export function Todolist(props: PropsType) {
                             title={t.title}
                             onChange={onChangeTitle}
                         />
-                        {/* <button onClick={onClickHandler}>x</button> */}
                         <IconButton aria-label="delete" onClick={onClickHandler}>
                             <Delete />
                         </IconButton>
