@@ -1,3 +1,4 @@
+import { TextField } from "@mui/material"
 import { ChangeEvent, useState } from "react"
 
 
@@ -27,7 +28,7 @@ export function AditableSpan(props: aditableSpanPropsType) {
 
     return (
         editMode
-            ? <input value={title} onChange={onchangeHandler} onBlur={viewMode} autoFocus />
+            ? <TextField size="small" value={title} onChange={onchangeHandler} onBlur={viewMode} autoFocus />
             : <span onDoubleClick={activateEditMode}>{props.title}</span>
     )
 }

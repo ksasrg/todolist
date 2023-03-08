@@ -1,4 +1,7 @@
 
+import { PostAdd } from '@mui/icons-material'
+import { IconButton } from '@mui/material'
+import TextField from '@mui/material/TextField'
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 
 type AddItemFormPropsType = {
@@ -34,12 +37,18 @@ export function AddItemForm(props: AddItemFormPropsType) {
 
     return (
         <div>
-            <input value={title}
+            <TextField value={title}
                 onChange={onChangeHandler}
                 onKeyPress={onKeyPressHandler}
+                variant="outlined"
+                error={!!error}
+                helperText={error}
+                size='small'
             />
-            <button onClick={addTask}>+</button>
-            {error && <div>{error}</div>}
+            {/* <Button onClick={addTask} variant={'contained'} color={'primary'} >+</Button> */}
+            <IconButton aria-label="delete" onClick={addTask}>
+                <PostAdd fontSize='medium'/>
+            </IconButton>
         </div>
     )
 }
