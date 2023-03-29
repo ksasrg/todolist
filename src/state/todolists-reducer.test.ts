@@ -1,4 +1,4 @@
-import { AddTodolistAC, ChangeTodolistFilteAC, ChangeTodolistTitleAC, RemoveTodolistAC, todolistsReducer } from './todolists-reducer'
+import { addTodolistAC, changeTodolistFilteAC, changeTodolistTitleAC, removeTodolistAC, todolistsReducer } from './todolists-reducer'
 import { v1 } from 'uuid'
 import { FilterValuesType, TodoListType as TodolistType } from '../App'
 
@@ -12,7 +12,7 @@ test('correct todolist should be removed', () => {
         { id: todolistId2, title: 'What to buy', filter: 'all' }
     ]
 
-    const endState = todolistsReducer(startState, RemoveTodolistAC(todolistId1))
+    const endState = todolistsReducer(startState, removeTodolistAC(todolistId1))
 
     expect(endState).not.toBe(startState)
     expect(endState.length).toBe(1)
@@ -30,7 +30,7 @@ test('correct todolist should be added', () => {
         { id: todolistId2, title: 'What to buy', filter: 'all' }
     ]
 
-    const endState = todolistsReducer(startState, AddTodolistAC(newTodolistTitle))
+    const endState = todolistsReducer(startState, addTodolistAC(newTodolistTitle))
 
     expect(endState).not.toBe(startState)
     expect(endState.length).toBe(3)
@@ -49,7 +49,7 @@ test('correct todolist should change its name', () => {
         { id: todolistId2, title: 'What to buy', filter: 'all' }
     ]
 
-    const endState = todolistsReducer(startState, ChangeTodolistTitleAC(todolistId2, newTodolistTitle))
+    const endState = todolistsReducer(startState, changeTodolistTitleAC(todolistId2, newTodolistTitle))
 
     expect(endState).not.toBe(startState)
     expect(endState[0].title).toBe('What to learn')
@@ -67,7 +67,7 @@ test('correct filter of todolist should be changed', () => {
         { id: todolistId2, title: 'What to buy', filter: 'all' }
     ]
 
-    const endState = todolistsReducer(startState, ChangeTodolistFilteAC(todolistId2, newFilter))
+    const endState = todolistsReducer(startState, changeTodolistFilteAC(todolistId2, newFilter))
 
     expect(endState).not.toBe(startState)
     expect(endState[0].filter).toBe('all')

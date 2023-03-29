@@ -21,7 +21,7 @@ export type TaskType = {
     isDone: boolean
 }
 
-type AllTaskType = {
+export type AllTaskType = {
     [key: string]: TaskType[]
 }
 
@@ -65,7 +65,7 @@ function App() {
         setAllTasks({ ...allTasks });
     }
 
-    const changeStatus = (taskId: string, checked: boolean, todoListId: string) => {
+    const changeTaskStatus = (taskId: string, checked: boolean, todoListId: string) => {
         const tasks = allTasks[todoListId]
         const task = tasks.find(t => t.id === taskId)
         if (task) {
@@ -75,7 +75,7 @@ function App() {
 
     }
 
-    function changeFilter(value: FilterValuesType, todoListId: string) {
+    function changeTaskFilter(value: FilterValuesType, todoListId: string) {
         const todoList = todoLists.find(el => el.id === todoListId)
         if (todoList) {
             todoList.filter = value
@@ -153,9 +153,9 @@ function App() {
                                             title={tl.title}
                                             tasks={tasksForTodolist}
                                             removeTask={removeTask}
-                                            changeFilter={changeFilter}
+                                            changeFilter={changeTaskFilter}
                                             addTask={addTask}
-                                            changeStatus={changeStatus}
+                                            changeStatus={changeTaskStatus}
                                             filter={tl.filter}
                                             removeList={removeList}
                                             changeTaskTitle={changeTaskTitle}
