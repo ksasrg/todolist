@@ -1,8 +1,7 @@
-
-import { PostAdd } from '@mui/icons-material'
-import { IconButton } from '@mui/material'
-import TextField from '@mui/material/TextField'
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
+import IconButton from '@mui/material/IconButton/IconButton';
+import TextField from '@mui/material/TextField/TextField';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {AddBox} from "@mui/icons-material";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -10,45 +9,40 @@ type AddItemFormPropsType = {
 
 export function AddItemForm(props: AddItemFormPropsType) {
 
-    const [title, setTitle] = useState("")
-    const [error, setError] = useState<string>('')
+    let [title, setTitle] = useState("")
+    let [error, setError] = useState<string | null>(null)
+
+    const addItem = () => {
+        if (title.trim() !== "") {
+            props.addItem(title);
+            setTitle("");
+        } else {
+            setError("Title is required");
+        }
+    }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
-        error && setError('')
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        setError(null);
         if (e.charCode === 13) {
-            addTask();
+            addItem();
         }
     }
 
-    const addTask = () => {
-        if (title.trim() === '') {
-            setError('Error')
-            setTitle("");
-            return
-        }
-        props.addItem(title.trim());
-        setTitle("");
-        setError('')
-    }
-
-    return (
-        <div>
-            <TextField value={title}
-                onChange={onChangeHandler}
-                onKeyPress={onKeyPressHandler}
-                variant="outlined"
-                error={!!error}
-                helperText={error}
-                size='small'
-            />
-            {/* <Button onClick={addTask} variant={'contained'} color={'primary'} >+</Button> */}
-            <IconButton aria-label="delete" onClick={addTask}>
-                <PostAdd fontSize='medium'/>
-            </IconButton>
-        </div>
-    )
+    return <div>
+        <TextField variant="outlined"
+                   error={!!error}
+                   value={title}
+                   onChange={onChangeHandler}
+                   onKeyPress={onKeyPressHandler}
+                   label="Title"
+                   helperText={error}
+        />
+        <IconButton color="primary" onClick={addItem}>
+            <AddBox />
+        </IconButton>
+    </div>
 }
