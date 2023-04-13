@@ -155,7 +155,7 @@ function App() {
                                 <Paper style={{padding: "10px"}}>
                                     <Todolist
                                         key={tl.id}
-                                        id={tl.id}
+                                        todolistId={tl.id}
                                         title={tl.title}
                                         tasks={tasksForTodolist}
                                         removeTask={removeTask}
