@@ -131,7 +131,6 @@ export const removeTaskAC = (taskId: string, todolistId: string): RemoveTaskActi
     return { type: 'REMOVE-TASK', taskId: taskId, todolistId: todolistId }
 }
 
-
 export type AddTaskActionType = ReturnType<typeof addTaskAC>
 export const addTaskAC = (task: TaskType) => {
     return { type: 'ADD-TASK' as const, task }
@@ -186,5 +185,17 @@ export const updateTaskStatusTC =
                         dispatch(changeTaskStatusAC(taskId, status, todolistId))
                     })
             }
-
         }
+
+export const changeTaskTitleTC = (taskId: string, title: string, todolistId: string) =>
+    (dispatch: Dispatch, getState: () => AppRootStateType) => {
+
+        const task = getState().tasks[todolistId].find(t => t.id === taskId)
+
+        if (task) {
+            todolistsAPI.updateTask(todolistId, taskId, { ...task, title })
+                .then(() => {
+                    dispatch(changeTaskTitleAC(taskId, title, todolistId))
+                })
+        }
+    }
