@@ -19,16 +19,12 @@ export function ErrorSnackbar() {
     console.log('ErrorSnackbar render');
     
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (errorApp) {
             setError(errorApp)
             setOpen(true)
-        } else {
-            setOpen(false)
-        }
+        } 
     }, [errorApp])
-
-
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {

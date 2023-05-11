@@ -35,12 +35,15 @@ function App() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
-                {status === 'loading' && <LinearProgress />}
-            </AppBar>
+                <div style={{ minHeight: '4px' }} >
+                    {status === 'loading' && <LinearProgress color='secondary' />}
+                </div>
+            </AppBar >
             <Container fixed>
+
                 <TodolistsList />
             </Container>
-        </div>
+        </div >
     )
 }
 
