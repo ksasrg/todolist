@@ -8,9 +8,12 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useFormik } from 'formik';
-import { useAppDispatch, useAppSelector } from '../../app/store';
-import { LoginType, loginTC } from './auth-reducer';
+// import { useAppDispatch, useAppSelector } from '../../app/store';
+// import { LoginType, loginTC } from './auth-reducer';
 import { Navigate } from 'react-router-dom';
+import { login } from './auth-slice';
+import { useAppDispatch, useAppSelector } from '../../app/store_rtk';
+import { LoginType } from '../../api/todolists-api';
 
 type FormikErrorType = {
     email?: string
@@ -39,7 +42,7 @@ export const Login = () => {
             return errors
         },
         onSubmit: (values: LoginType) => {
-            dispatch(loginTC(values))
+            dispatch(login(values))
         },
     })
 

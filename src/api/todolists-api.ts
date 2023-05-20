@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from 'axios'
-import { LoginType } from '../features/Login/auth-reducer';
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
@@ -45,7 +44,7 @@ export const authAPI = {
                 LoginType>
             ('auth/login', data)
     },
-    me() {
+    getMe() {
         return instance.get<ResponseType<UserType>>('auth/me')
     },
     logout() {
@@ -113,4 +112,10 @@ type UserType = {
     id: number
     email: string
     password: string
+}
+
+export type LoginType = {
+    email: string,
+    password: string,
+    rememberMe: boolean
 }
