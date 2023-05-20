@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import './App.css'
 import { TodolistsList } from '../features/TodolistsList/TodolistsList'
-// import { useAppDispatch,  } from './store'
-// import { RequestStatusType } from './app-reducer'
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -15,12 +13,10 @@ import { ErrorSnackbar } from '../components/ErrorSnackbar/ErrorSnackbar'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { Login } from '../features/Login/Login'
 import { Login2 } from '../features/Login/Login2'
-// import { logoutTC } from '../features/Login/auth-reducer'
 import CircularProgress from '@mui/material/CircularProgress/CircularProgress'
 import { getMe, logout } from '../features/Login/auth-slice'
 import { useAppDispatch, useAppSelector } from './store_rtk'
 import { RequestStatusType } from './app-slice';
-
 
 function App() {
     const status = useAppSelector<RequestStatusType>((state) => state.app.status)
