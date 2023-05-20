@@ -56,7 +56,6 @@ export const login = createAsyncThunk(
 
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedIn(true))
-                console.log(res.data.data.userId); // debug
             } else {
                 handleServerAppError(res.data, dispatch)
             }
